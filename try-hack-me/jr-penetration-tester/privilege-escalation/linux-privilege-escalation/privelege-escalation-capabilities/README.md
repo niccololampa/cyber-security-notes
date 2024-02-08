@@ -28,4 +28,6 @@ cp $(which view) .
 
 3. Run `cat /home/ubuntu/flag4.txt`
 
+![Screenshot 2024-02-08 at 9 47 18 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/775dc683-65c0-4ed8-9122-13997d390a7f)
+
 **Answer: THM-9349843**
