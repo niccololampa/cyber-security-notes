@@ -1,5 +1,7 @@
 ## Privilege Escalation Capabilities Solution
 
+Capabilities which are used to grant specific prvileges to process or entities can be used for privilege escalation. These are directly associated with process or objects, allowing for finer-grained control over access. 
+
 ### How many binaries have set capabilities?
 
 1. Run the following command to list enabled capabilities
