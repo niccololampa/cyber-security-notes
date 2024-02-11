@@ -1,4 +1,4 @@
-## Privilege Escalation PATH
+## Privilege Escalation PATH Solution
 
 ### Notes:
 - exploiting path folders which we have write access to. 
