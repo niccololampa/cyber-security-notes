@@ -13,7 +13,7 @@
 find / -writable 2>/dev/null | cut -d "/" -f 2 | sort -u 
 ```
 
-Running it doesn't produce the answer we need let's go 1 level deeper: 
+Running it doesn't provide the answer we need let's go 1 level deeper: 
 ```
 find / -writable 2>/dev/null | cut -d "/" -f 2,3 | grep -v proc | sort -u
 ```
