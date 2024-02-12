@@ -1,7 +1,7 @@
 ## Linux Privilege Escalation: Capstone Challenge Solution
 
 
-## What is the content of the flag1.txt file?
+### What is the content of the flag1.txt file?
 
 1. Let's gather info first about the machine
 ```
@@ -83,7 +83,7 @@ cat flag1.txt
 **Answer: THM-42828719920544**
 
 
-## What is the content of the flag2.txt file?
+### What is the content of the flag2.txt file?
 
 1. Continuing from what we have done above, the current user is now `missy`. Let's check her privileges by running `sudo -l`
 ![Screenshot 2024-02-13 at 12 00 14 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/115e5260-e0a4-4719-a074-86f4977579ca)
