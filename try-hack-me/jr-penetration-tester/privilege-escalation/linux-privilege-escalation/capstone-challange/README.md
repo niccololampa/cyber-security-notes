@@ -23,11 +23,12 @@ netstat -l
 env
 ```
 
-![Screenshot 2024-02-12 at 10 52 50 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/93885557-a88e-46b1-afec-ce37ae12a6da)
 
 2. Let's go to /home where we will discover that there are two other users `missy` and `rootflag`. From the history we know that the flag2.txt is in rootflag user. So chances are the `flag1.txt` is in `/home/missy`.
 
-3. Let's first try checking if there is a kernel exploit.
+![Screenshot 2024-02-12 at 10 52 50 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/93885557-a88e-46b1-afec-ce37ae12a6da)
+
+4. Let's first try checking if there is a kernel exploit.
 
 ![Screenshot 2024-02-12 at 10 57 42 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/0816430f-bb90-4de7-84c3-25b1230dba59)
 
