@@ -1,4 +1,4 @@
-## Linux Privilege Escalation: Capstone Challenge
+## Linux Privilege Escalation: Capstone Challenge Solution
 
 
 ## What is the content of the flag1.txt file?
