@@ -16,7 +16,7 @@ As with the nmap results above the `sC` option was able to determine that **Anon
 
 **anonymous**
 
-## What is the name of the file downloaded over this service?
+### What is the name of the file downloaded over this service?
 
 1. Let's connect via ftp
 
@@ -45,7 +45,7 @@ ftp {target_machine_ip}
 **Answer: zip2john** 
 
 
-##What is the password for the admin user on the website?
+### What is the password for the admin user on the website?
 
 1. Let's run the `zip2john` script to crack the password. First let's obtain the password hashes.
    ```bash
@@ -86,7 +86,7 @@ john --wordlist=/usr/share/wordlists/rockyou.txt --format=raw-md5 admin-hash.txt
 **Answer: qwerty789**
 
 
-## What option can be passed to sqlmap to try to get command execution via the sql injection?
+### What option can be passed to sqlmap to try to get command execution via the sql injection?
 
 1. Login using username `admin` and password `qwerty789`
 2. Go to browser and get the cookie `PHPSESSID` value
@@ -147,10 +147,19 @@ export TERM=xterm
 
 ![Screenshot 2024-02-22 at 2 10 53 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/752994b0-6b2d-4cf4-9aa4-9fa83b68a295)
 
-**Answer: vi ** 
+**Answer: vi** 
 
+### Submit user flag
 
-11. Run `cd ~/` to go to postgres user's folder. In here we will find user.txt
-    Flag `ec9b13ca4d6229cd5cc1e09980965bf7`
+1. Our connection via reverse shell is always being disconnected from the server. Since we know the password of the user `postgres`, let's just connect via ssh.
+   ```bash
+   ssh postgres@{target_machine_ip}
+   ```
+
+2.  Run `cd ~/` to go to `postgres` user's folder to see if there is something interesting. In here we will find `user.txt`
+
+![Screenshot 2024-02-22 at 2 49 00 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/09726c3d-4635-4b0d-9f71-86de6ab0e1f9)
+
+**Answer:ec9b13ca4d6229cd5cc1e09980965bf7**
 
 
