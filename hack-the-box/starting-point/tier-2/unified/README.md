@@ -33,3 +33,9 @@
 **Answer: 6.4.54**
 
 ## What is the CVE for the identified vulnerability?
+
+Hint : Look for UniFi vulnerabilities in 2021
+
+1. Just do a google search for **unifi network version 6.4.54 cve**
+
+**Answer: CVE-2021-44228** 
