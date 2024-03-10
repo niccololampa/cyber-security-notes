@@ -158,7 +158,7 @@ export TERM=xterm
 
 ### Submit user flag
 
-1. Our connection via reverse shell is always being disconnected from the server. Since we know the password (P@s5w0rd! of the user `postgres`, let's just connect via ssh.
+1. Our connection via reverse shell is always being disconnected from the server. Since we know the password (P@s5w0rd!) of the user `postgres`, let's just connect via ssh.
    ```bash
    ssh postgres@{target_machine_ip}
    ```
