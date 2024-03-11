@@ -4,7 +4,7 @@
 
 1. Run the following to discover open ports:
    ```
-   nmap -sV {target_ip)
+   nmap -sV  {target_ip)
    ```
    
    ![Screenshot 2024-03-10 at 6 48 51 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/42db2934-de9e-45dc-ad01-ee3a08cdab9e)
@@ -39,3 +39,32 @@ Hint : Look for UniFi vulnerabilities in 2021
 1. Just do a google search for **unifi network version 6.4.54 cve**
 
 **Answer: CVE-2021-44228** 
+
+## What protocol does JNDI leverage in the injection?
+
+1. We can just read the details of CVE that we found [https://nvd.nist.gov/vuln/detail/CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228)
+
+**Answer: LDAP ** 
+
+## What tool do we use to intercept the traffic, indicating the attack was successful?
+
+*Hint: Not wireshark*
+
+1. Let's just do a lookup for alternative software to wireshark
+
+**Answer: tcpdump**
+
+
+## What port do we need to inspect intercepted traffic for?
+*Hint: Default port for LDAP*
+
+1. Let's do a lookup for default LDAP port
+
+**Answer: 389**
+
+## What port is the MongoDB service running on?
+
+*Hint: Check the running processes on the system*
+
+
+
