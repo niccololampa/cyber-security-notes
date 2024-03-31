@@ -12,7 +12,7 @@
 
 **Answer: 22,6789,8080,8443**
 
-## What is the title of the software that is running running on port 8443?
+### What is the title of the software that is running running on port 8443?
 
 1. We know from the previous section that 8443 is an ssl service. We know that port 8080 is http service. Lets first checkout **{target_ip}:8080** in our browser. This redirects to a website `https://{target_ip}:8443/manage/account/login?redirect=%2Fmanage`
    
@@ -24,7 +24,7 @@
 
 **Answer: UniFi Network** 
 
-## What is the version of the software that is running?
+### What is the version of the software that is running?
 
 1. Looking at the website we were redirected to we find the version.
 
@@ -32,7 +32,7 @@
 
 **Answer: 6.4.54**
 
-## What is the CVE for the identified vulnerability?
+### What is the CVE for the identified vulnerability?
 
 Hint : Look for UniFi vulnerabilities in 2021
 
@@ -40,13 +40,13 @@ Hint : Look for UniFi vulnerabilities in 2021
 
 **Answer: CVE-2021-44228** 
 
-## What protocol does JNDI leverage in the injection?
+### What protocol does JNDI leverage in the injection?
 
 1. We can just read the details of CVE that we found [https://nvd.nist.gov/vuln/detail/CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228)
 
 **Answer: LDAP** 
 
-## What tool do we use to intercept the traffic, indicating the attack was successful?
+### What tool do we use to intercept the traffic, indicating the attack was successful?
 
 *Hint: Not wireshark*
 
@@ -55,7 +55,7 @@ Hint : Look for UniFi vulnerabilities in 2021
 **Answer: tcpdump**
 
 
-## What port do we need to inspect intercepted traffic for?
+### What port do we need to inspect intercepted traffic for?
 *Hint: Default port for LDAP*
 
 1. Let's do a lookup for default LDAP port
@@ -63,7 +63,7 @@ Hint : Look for UniFi vulnerabilities in 2021
 **Answer: 389**
 
 
-## What port is the MongoDB service running on?
+### What port is the MongoDB service running on?
 
 *Hint: Check the running processes on the system*
 
@@ -111,14 +111,14 @@ now let's upgrade it into a bash shell
 
 
 
-## What port is the MongoDB service running on?
+### What port is the MongoDB service running on?
 1. Let's list down all the services in our target by running the command
    ``` ps aux | grep mongo```
 ![Screenshot 2024-03-15 at 10 47 02 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/5aff177d-c25c-4be3-bea7-d895682c81d1)
 
 **Answer: 27117**
 
-## What is the default database name for UniFi applications?
+### What is the default database name for UniFi applications?
 *Hint: Connect to Mongo and list the databases*
 
 1. Let's connect to mongo runningin  port 27117
@@ -134,7 +134,7 @@ now let's upgrade it into a bash shell
 
 **Answer: ace** 
 
-## What is the function we use to enumerate users within the database in MongoDB?
+### What is the function we use to enumerate users within the database in MongoDB?
 
 *Hint: Search for "find items in mongo" in Google*
 
@@ -148,7 +148,7 @@ now let's upgrade it into a bash shell
 
 **Answer:db.admin.update()**
 
-## What is the password for the root user?
+### What is the password for the root user?
 
 1. Now we have access to mongodb let's enumerate all the users in the unify's ace database to see if there an interesting user. The `forEach` here beautifies the output to a readable json.
 ```bash
@@ -201,7 +201,7 @@ mongo --port 27117 ace --eval 'db.admin.update({"_id":ObjectId("61ce278f46e0fb00
 
 **Answer: NotACrackablePassword4U2022**
 
-## Submit user flag
+### Submit user flag
 
 1. Now let's try to connect via ssh. Open a new terminal and execute the following. (Use the password found in the settings)
 
@@ -221,7 +221,7 @@ find -type f -name "user.txt"
 **Answer: 6ced1a6a89e666c0620cdb10262ba127**
 
 
-## Submit root flag
+### Submit root flag
 1. Let's look for `root.txt` file
 ```bash
 find -type f -name "root.txt"
