@@ -116,6 +116,7 @@ print(hashlib.sha256(username_trial).hexdigest()[4], hashlib.sha256(username_tri
 ![Screenshot 2024-04-06 at 1 16 35 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/5880862b-5bfe-4e44-9b04-d3f328d24e20)
 
 Running `python keygenme-trial2.py` again. 
+
 ![Screenshot 2024-04-06 at 1 21 41 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/97ba8c7f-93f8-427b-bdbe-b49dee567e91)
 
 The program prints `0 1 5 8 2 4 1 9`
