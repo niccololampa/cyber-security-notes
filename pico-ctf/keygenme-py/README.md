@@ -1,8 +1,10 @@
 ## keygenme-py Solution
 
-This is the solution for [picoCTF's keygenme-py challenge](https://play.picoctf.org/practice/challenge/121?page=2)
+This is the solution for [picoCTF's keygenme-py challenge](https://play.picoctf.org/practice/challenge/121?page=2) revese engineeering problem.
 
 ![Screenshot 2024-04-06 at 12 00 23 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/e95f0ea9-5fa3-443a-aea2-c14442dd4dbb)
+
+This problem was taken from the picoCTF 2021 and the solution will be discussed below. So proceed with caution.
 
 Let's download the `keygenme-trial.py`
 
@@ -139,4 +141,9 @@ Now let's run the original `python keygenme-trial.py` and enter the derived key 
 
 
 **Flag: picoCTF{1n_7h3_|<3y_of_01582419}**
+
+Until next time. Keep learning.
+
+Stay stoked and code. :)
+
 
