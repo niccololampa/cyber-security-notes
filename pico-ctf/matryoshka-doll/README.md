@@ -198,7 +198,7 @@ mv 4_c.jpg 4_c.zip
 unzip 4_c.zip
 ```
 
-Finally a `flag.txt` has been uncompressed. 
+Finally a `flag.txt` file has been uncompressed. 
 
 
 ![Screenshot 2024-04-07 at 6 23 51 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/ea55a0df-ef90-4ba9-a58c-326502a90964)
