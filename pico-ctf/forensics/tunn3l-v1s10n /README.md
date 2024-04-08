@@ -41,6 +41,10 @@ Megapixels                      : 0.347
 
 convert -quality 90 copy copy.bmp
 ```
+![Screenshot 2024-04-09 at 1 23 59 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/f7121864-5c00-4c45-ad31-16b73802b821)
+
+
+![Screenshot 2024-04-09 at 1 23 46 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/6b30de11-6628-4296-961a-23ce1c7f8709)
 
 **Flag: picoCTF{qu1t3_a_v13w_2020}**
 
