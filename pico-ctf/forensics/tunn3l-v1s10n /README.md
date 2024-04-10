@@ -101,7 +101,7 @@ From the documentation we found in `BITMAPINFOHEADER` that image width and heigh
 
 ![Screenshot 2024-04-10 at 10 30 00 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/e78ca2b0-dfd4-4e7e-90fc-137c2326750f)
 
-So going to our hexeditor we find the hex values of width at offset 12 to be `6E 04` (integer value 1134) and height at offset 16 to be `32 01` (integer value 306). 
+So going to our hexeditor we find the hex values of width at offset 12 to be `6E 04` and height at offset 16 to be `32 01`. 
 ![Screenshot 2024-04-10 at 10 37 18 PM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/bd6de01e-cea5-4745-b55d-be11107820f2)
 
 Let's try modifying height to be the same as width `6E 04` and saving the file as `tunn3l_v1s10n_modified`
