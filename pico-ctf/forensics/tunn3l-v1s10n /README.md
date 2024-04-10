@@ -4,6 +4,8 @@ This is the solution for [picoCTF's Tunn3l V1s10n challenge](https://play.picoct
 
 ![Screenshot 2024-04-10 at 12 33 38 AM](https://github.com/niccololampa/cyber-security-notes/assets/37615906/81978160-ec1d-4775-889e-06316c2dc441)
 
+This problem was taken from the picoCTF 2021 and the solution will be discussed below. So proceed with caution.
+
 Here we are able to download a file called `tunn3l_v1s10n`.
 
 Let's investigate the file first by running 
